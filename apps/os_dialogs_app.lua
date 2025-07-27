@@ -51,14 +51,14 @@ laptop.register_view('os:select_file', {
 		table.sort(param.files_list, function(a,b) return a.name<b.name end)
 		-- adjust tilte
 		if param.mode == 'save' then
-			param.message = 'Save file as'
-			param.button_txt = 'Save'
+			param.message = 'Enregistrer le fichier'
+			param.button_txt = 'Enregistrer'
 		elseif param.mode == 'open' then
-			param.message = 'Open file'
-			param.button_txt = 'Open'
+			param.message = 'Ouvrir le fichier'
+			param.button_txt = 'Ouvrir'
 		else
-			param.message = 'select file'
-			param.button_txt = 'Select'
+			param.message = 'Selectionner le fichier'
+			param.button_txt = 'Selectionner'
 		end
 		app.app_info = param.message
 
