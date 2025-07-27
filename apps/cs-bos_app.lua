@@ -150,7 +150,7 @@ end
 
 laptop.register_app("cs-bos_launcher", {
 	app_name = "CS-BOS Prompt",
-	app_info = "Command Line Interface",
+	app_info = "Interface de Ligne de Commande",
 	fullscreen = true,
 	app_icon = "laptop_cs_bos.png",
 
