@@ -23,7 +23,7 @@ function realchess.move(data, pos, from_list, from_index, to_list, to_index, _, 
 	local meta = minetest.get_meta(pos)
 
 	if data.winner ~= "" then
-		data.messageOther = "This game is over."
+		data.messageOther = "Cette partie est perdue."
 		return 0
 	end
 
@@ -34,11 +34,11 @@ function realchess.move(data, pos, from_list, from_index, to_list, to_index, _, 
 
 	if pieceFrom:find("white") then
 		if data.playerWhite ~= "" and data.playerWhite ~= playerName then
-			data.messageOther = "Someone else plays white pieces!"
+			data.messageOther = "Quelqu'un d'autre joue les pièces blanches!"
 			return 0
 		end
 		if data.lastMove ~= "" and data.lastMove ~= "black" then
-			data.messageWhite = "It's not your turn, wait for your opponent to play."
+			data.messageWhite = "Ce n'est pas votre tour, attendez-le pour jouer."
 			return 0
 		end
 		if pieceTo:find("white") then
@@ -49,11 +49,11 @@ function realchess.move(data, pos, from_list, from_index, to_list, to_index, _, 
 		thisMove = "white"
 	elseif pieceFrom:find("black") then
 		if data.playerBlack ~= "" and data.playerBlack ~= playerName then
-			data.messageOther = "Someone else plays white pieces!"
+			data.messageOther = "Quelqu'un d'autre joue les pièces blanches!"
 			return 0
 		end
 		if data.lastMove ~= "" and data.lastMove ~= "white" then
-			data.messageBlack = "It's not your turn, wait for your opponent to play."
+			data.messageBlack = "Ce n'est pas votre tour, attendez le pour jouer."
 			return 0
 		end
 		if pieceTo:find("black") then
@@ -457,15 +457,15 @@ function realchess.move(data, pos, from_list, from_index, to_list, to_index, _, 
 
 	if data.lastMove == "black" then
 		data.messageWhite = "["..os.date("%H:%M:%S").."] "..
-				playerName.." moved a "..pieceFrom:match("_(%a+)")..", it's now your turn."
+				playerName.." moved a "..pieceFrom:match("_(%a+)")..", c'est votre tour."
 	elseif data.lastMove == "white" then
 		data.messageBlack = "["..os.date("%H:%M:%S").."] "..
-				playerName.." moved a "..pieceFrom:match("_(%a+)")..", it's now your turn."
+				playerName.." moved a "..pieceFrom:match("_(%a+)")..", c'est votre tour."
 	end
 
 	if pieceTo:sub(11,14) == "king" then
-		data.messageWhite =  playerName.." won the game."
-		data.messageBlack =  playerName.." won the game."
+		data.messageWhite =  playerName.." à gagné."
+		data.messageBlack =  playerName.." à gagné."
 		data.winner = thisMove
 	end
 
@@ -515,7 +515,7 @@ register_piece("king")
 	laptop.register_app("realchess", {
 		app_name = "Realchess",
 		app_icon = "laptop_realchess_chessboard_icon.png",
-		app_info = "A Chess game",
+		app_info = "RealChess - Un jeu d'échecs",
 		os_min_version = "5.51",
 		formspec_func = function(app, mtos)
 			local data = mtos.bdev:get_app_storage('ram', 'realchess')
@@ -575,7 +575,7 @@ register_piece("king")
 			end
 			local formspec =
 					"bgcolor[#080808BB;true]background[3,1;8,8;laptop_realchess_chess_bg.png]"..
-					mtos.theme:get_button('12,1;2,2', 'major', 'new', 'New Game', 'Start a new game')..
+					mtos.theme:get_button('12,1;2,2', 'major', 'new', 'Nouv. Partie', 'Commencer une nouvelle partie')..
 					"list[context;board;3,1;8,8;]"..
 					"listcolors[#00000000;#00000000;#00000000;#30434C;#FFF]"
 					if data.messageOther then
@@ -606,8 +606,8 @@ register_piece("king")
 					(data.playerWhite ~= playerName or data.playerBlack ~= playerName) then
 				data.init_done = nil
 			else
-				data.messageOther = "[!] You can't reset the chessboard, a game has been started.\n"..
-						"If you are not a current player, try again in "..timeout_format(timeout_limit)
+				data.messageOther = "[!] Vous ne pouvez plus mettre à zéro le plateau, une partie à commencé.\n"..
+						"Si vous n'êtes pas un joueur, patientez "..timeout_format(timeout_limit)
 			end
 		end,
 		allow_metadata_inventory_move = function(app, mtos, player, from_list, from_index, to_list, to_index, count)
