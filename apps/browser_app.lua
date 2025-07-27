@@ -55,13 +55,14 @@ laptop.register_app("browser", {
 		local formspec = laptop.browser_api.header_formspec_func(app, mtos) ..
 				--"image[.1,1.3;18,1.6;laptop_header_web.png]"..
 				"image[0,1.3;18,1.6;laptop_welcome_web.png]"..
-				mtos.theme:get_label('.1,2.7', 'MineBrowse is a working web browser powered by formspecs. It is community driven,', 'contrast') ..
-				mtos.theme:get_label('.1,3', 'which means websites are created by the community. If you like to add your own site', 'contrast') ..
-				mtos.theme:get_label('.1,3.3', 'visit submit.official for further details.', 'contrast') ..
+				mtos.theme:get_label('.1,2.7', 'MineBrowse est un navigateur web fonctionnel propulsé par les formspecs.', 'contrast') ..
+				mtos.theme:get_label('.1,3.2', 'Il est communautaire, ce qui signifie que les sites web sont créés par la communauté.', 'contrast') ..
+				mtos.theme:get_label('.1,3.7', 'Si vous souhaitez ajouter votre propre site, visitez submit.official pour plus de détails.', 'contrast') ..
 				"background[0,1.2;15,9;laptop_background.png]"..
 				mtos.theme:get_button('11.3,9.3;3,.8', 'url_bright', 'page_link', 'submit.official') ..
 				"image[11,2.8;4,8.1;laptop_ad1_web.png]"..
 				"image[.1,3.8;12,1.2;laptop_wa_web.png]"
+
 
 		-- Prepare / Generate Pages list
 		local c_row_count = 12
@@ -94,7 +95,7 @@ laptop.register_view("error.404", {
 	app_info = "Page not found",
 	formspec_func = function(app, mtos)
 		local formspec = laptop.browser_api.header_formspec_func(app, mtos) ..
-			mtos.theme:get_label('.3,1.1','Error 404 - Page not found')
+			mtos.theme:get_label('.3,1.1','Error 404 - Page non trouvée')
 		return formspec
 	end,
 	receive_fields_func = function(app, mtos, sender, fields)
@@ -109,6 +110,28 @@ laptop.register_view("browser:settings", {
 	app_info = "Browser settings",
 	formspec_func = function(app, mtos)
 		local formspec = mtos.theme:get_label('.3,1.1','Settings')
+		formspec = formspec .. mtos.theme:get_label('.3,1.4', 'Dévelopement non terminé !')
+		return formspec
+	end,
+	receive_fields_func = function(app, mtos, sender, fields)
+		laptop.browser_api.header_receive_fields_func(app, mtos, sender, fields)
+	end
+})
+
+
+--------------------------------------------
+-- Submit informations
+--------------------------------------------
+laptop.register_view("submit.official", {
+	app_info = "Contribuer au mod Laptop Minetest",
+	browser_page = true,
+	formspec_func = function(app, mtos)
+		local formspec = laptop.browser_api.header_formspec_func(app, mtos) ..
+			mtos.theme:get_label('.1,2.8', 'Aidez à créer plus de sites web explorables !', 'contrast') ..
+			mtos.theme:get_label('.1,3.1', 'Chaque site peut avoir plusieurs pages.', 'contrast') ..
+			mtos.theme:get_label('.1,3.4', 'Soumettez vos sites/pages à :', 'contrast') ..
+			mtos.theme:get_label('.1,3.7', 'https://github.com/Gerold55/MineBrowse-Sites', 'contrast') ..
+			"background[0,1.2;15,9;laptop_background.png]"
 		return formspec
 	end,
 	receive_fields_func = function(app, mtos, sender, fields)
@@ -117,18 +140,16 @@ laptop.register_view("browser:settings", {
 })
 
 --------------------------------------------
--- Submit informations
+-- Traduction information
 --------------------------------------------
-laptop.register_view("submit.official", {
-	app_info = "Contribute to Minetest Laptop Mod",
+laptop.register_view("traduction.info", {
+	app_info = "Informations sur le traducteur",
 	browser_page = true,
 	formspec_func = function(app, mtos)
 		local formspec = laptop.browser_api.header_formspec_func(app, mtos) ..
-				mtos.theme:get_label('.1,2.8', 'You can help create many more websites that people can explore!', 'contrast') ..
-				mtos.theme:get_label('.1,3.1', 'Each website can have multiple pages.', 'contrast') ..
-				mtos.theme:get_label('.1,3.4', 'Please submit your website/webpages to:', 'contrast') ..
-				mtos.theme:get_label('.1,3.7', 'https://github.com/Gerold55/MineBrowse-Sites', 'contrast') ..
-				"background[0,1.2;15,9;laptop_background.png]"
+			mtos.theme:get_label('.1,2.8', 'Ce mod à été traduit en francais par Team CF Games', 'contrast') ..
+			mtos.theme:get_label('.1,3.1', 'https://github.com/Team-CF-Games/laptop', 'contrast') ..
+			"background[0,1.2;15,9;laptop_background.png]"
 		return formspec
 	end,
 	receive_fields_func = function(app, mtos, sender, fields)
