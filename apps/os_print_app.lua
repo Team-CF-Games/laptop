@@ -64,7 +64,7 @@ local function sync_stack_values(mtos)
 end
 
 laptop.register_app("printer_launcher", {
-	app_name = "Printer firmware",
+	app_name = "Imprimer",
 	view = true, -- to be hidden in "usual" OS
 	fullscreen = true,
 	formspec_func = function(launcher_app, mtos)
@@ -211,7 +211,7 @@ laptop.register_view("printer:app", {
 		local sysstore = mtos.bdev:get_app_storage('system', 'printer:app')
 		sysstore.printers = sysstore.printers or {}
 
-		local formspec = mtos.theme:get_label('0.5,1', "Selected Printer:")
+		local formspec = mtos.theme:get_label('0.5,1', "Imprimante séléctionnée:")
 		if sysstore.selected_printer then
 			local printer = get_printer_info(sysstore.selected_printer.pos)
 			if not printer then
@@ -250,12 +250,12 @@ laptop.register_view("printer:app", {
 			end
 			formspec = formspec .. ";"..sel_idx.."]"
 		else
-			formspec = formspec .. "No printer found :(]"
+			formspec = formspec .. "Aucune imprimante trouvée :(]"
 		end
 
-		formspec = formspec .. mtos.theme:get_button('2.7,9;2,0.7', 'minor', 'scan', 'Search', 'Scan for printers')
+		formspec = formspec .. mtos.theme:get_button('2.7,9;2,0.7', 'minor', 'scan', 'Scan', 'Trouver une imprimante')
 		if sysstore.selected_printer and sysstore.selected_printer.status == 'online' then
-			formspec = formspec .. mtos.theme:get_button('10,9;2,0.7', 'major', 'print', 'Print', 'Print file')
+			formspec = formspec .. mtos.theme:get_button('10,9;2,0.7', 'major', 'print', 'Imprimer', 'Imprimer le fichier')
 		end
 
 		param.label = param.label or "<unnamed>"
