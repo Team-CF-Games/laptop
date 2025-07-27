@@ -3,7 +3,7 @@
 laptop.register_app("mail", {
 	app_name = "Mail",
 	app_icon = "laptop_email_letter.png",
-	app_info = "Send Electronic Mail",
+	app_info = "E-Mail",
 	formspec_func = function(app, mtos)
 		local cloud = mtos.bdev:get_app_storage('cloud', 'mail')
 		if not cloud then
@@ -108,12 +108,12 @@ laptop.register_app("mail", {
 			end
 			formspec = formspec .. mtos.theme:get_image_button('8,9;1,1', 'minor', 'print', 'laptop_printer_button.png', '', 'Print Email')
 			if account.selected_box == "inbox" then
-				formspec = formspec .. mtos.theme:get_label('8,0.5', "From: "..(account.selectedmessage.sender or ""))
+				formspec = formspec .. mtos.theme:get_label('8,0.5', "De: "..(account.selectedmessage.sender or ""))
 			else
-				formspec = formspec .. mtos.theme:get_label('8,0.5', "To: "..(account.selectedmessage.receiver or ""))
+				formspec = formspec .. mtos.theme:get_label('8,0.5', "Pour: "..(account.selectedmessage.receiver or ""))
 			end
 
-			formspec = formspec .. mtos.theme:get_label('8,1', "Subject: "..(account.selectedmessage.subject or ""))..
+			formspec = formspec .. mtos.theme:get_label('8,1', "Sujet: "..(account.selectedmessage.subject or ""))..
 				mtos.theme:get_tableoptions(false).."tablecolumns[text]table[8,1.55;6.85,7.15;preview_bg;]"..
 					"textarea[8.35,1.6;6.8,8.25;;"..minetest.colorize(mtos.theme.table_textcolor, minetest.formspec_escape(account.selectedmessage.body) or "")..";]"
 		end
@@ -169,12 +169,12 @@ laptop.register_app("mail", {
 				account.newmessage = {}
 				account.newmessage.receiver = account.selectedmessage.sender
 				account.newmessage.subject = "Re: "..(account.selectedmessage.subject or "")
-				account.newmessage.body = "Type your reply here."..string.char(10)..string.char(10).."--Original message follows--"..string.char(10)..(account.selectedmessage.body or "")
+				account.newmessage.body = "Ecrivez votre réponse ici."..string.char(10)..string.char(10).."--Original message follows--"..string.char(10)..(account.selectedmessage.body or "")
 				mtos:set_app("mail:compose")
 			elseif fields.forward then
 				account.newmessage = {}
 				account.newmessage.subject = "Fw: "..(account.selectedmessage.subject or "")
-				account.newmessage.body = "Type your reply here."..string.char(10)..string.char(10).."--Original message follows--"..string.char(10)..(account.selectedmessage.body or "")
+				account.newmessage.body = "Ecrivez votre réponse ici."..string.char(10)..string.char(10).."--Original message follows--"..string.char(10)..(account.selectedmessage.body or "")
 				mtos:set_app("mail:compose")
 			elseif fields.markread then
 				account.selectedmessage.is_read = true
@@ -195,8 +195,8 @@ laptop.register_app("mail", {
 
 laptop.register_view("mail:newplayer", {
 	formspec_func = function(app, mtos)
-		return mtos.theme:get_label('1,3', "No mail account for player "..mtos.sysram.current_player.. " found. Do you like to create a new account?")..
-				mtos.theme:get_button('1,4;3,1', 'major', 'create', 'Create Account')
+		return mtos.theme:get_label('1,3', "Aucun compte mail pour le joueur "..mtos.sysram.current_player.. " n'a été trouvé. Souhaitez-vous en créer un?")..
+				mtos.theme:get_button('1,4;3,1', 'major', 'creer', 'Créer un compte')
 	end,
 	receive_fields_func = function(app, mtos, sender, fields)
 		if mtos.sysram.current_player ~= mtos.sysram.last_player then
@@ -218,7 +218,7 @@ laptop.register_view("mail:newplayer", {
 
 laptop.register_view("mail:nonet", {
 	formspec_func = function(app, mtos)
-		return mtos.theme:get_label('1,3', "NO NETWORK CONNECTION")
+		return mtos.theme:get_label('1,3', "AUCUNE CONNEXION INTERNET")
 	end,
 	receive_fields_func = function(app, mtos, sender, fields)
 		app:exit_app()
@@ -237,8 +237,8 @@ laptop.register_view("mail:compose", {
 				mtos.theme:get_label("0.25,2", "Subject:", "contrast").."field[2.7,2;5,1;subject;;"..minetest.formspec_escape(message.subject or "").."]"..
 				"background[0,3.05;7.95,3.44;"..mtos.theme.contrast_background.."]"..
 				"textarea[0.25,3;8,4;body;;"..minetest.formspec_escape(message.body or "").."]"..
-				mtos.theme:get_button("0,8;2,1", "major", "send", "Send message")..
-				mtos.theme:get_label("0.25,0.75", "Receiver:", "contrast").."dropdown[2.4,0.75;5.2,1;receiver;"
+				mtos.theme:get_button("0,8;2,1", "major", "envoyer", "Envoyer un message")..
+				mtos.theme:get_label("0.25,0.75", "Receveur:", "contrast").."dropdown[2.4,0.75;5.2,1;receiver;"
 
 		local sortedtab = {}
 		for playername,_ in pairs(cloud) do
@@ -256,7 +256,7 @@ laptop.register_view("mail:compose", {
 		formspec = formspec .. ";"..(selected_idx or "").."]"
 
 		if message.receiver and not cloud[message.receiver] then
-			formspec = formspec..mtos.theme:get_label('2.3,8', "invalid receiver player")
+			formspec = formspec..mtos.theme:get_label('2.3,8', "joueur de reception invalide")
 		end
 		return formspec
 	end,
