@@ -107,9 +107,9 @@ laptop.register_view("error.404", {
 -- Settings
 --------------------------------------------
 laptop.register_view("browser:settings", {
-	app_info = "Browser settings",
+	app_info = "Paramètres de MineBrowse",
 	formspec_func = function(app, mtos)
-		local formspec = mtos.theme:get_label('.3,1.1','Settings')
+		local formspec = mtos.theme:get_label('.3,1.1','Paramètres')
 		formspec = formspec .. mtos.theme:get_label('.3,1.4', 'Dévelopement non terminé !')
 		return formspec
 	end,
