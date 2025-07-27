@@ -1,9 +1,9 @@
 local store_area = 'stickynote:files'
 
 laptop.register_app("stickynote", {
-	app_name = "Notepad",
+	app_name = "Bloc-Notes",
 	app_icon = "laptop_notes_pad.png",
-	app_info = "Write Text Documents",
+	app_info = "Bloc-Notes - Ecrire des fichiers textes",
 	formspec_func = function(app, mtos)
 		local data = mtos.bdev:get_app_storage('system', 'stickynote')
 		data.files = data.files or {}
@@ -24,10 +24,10 @@ laptop.register_app("stickynote", {
 
 		local formspec = "background[0,1.35;15.2,8.35;"..mtos.theme.contrast_background.."]"..
 				"textarea[0.35,1.35;15.08,9.5;text;;"..minetest.formspec_escape(data.text).."]"..
-				mtos.theme:get_button('0,0.5;1.5,0.8', 'minor', 'clear', 'New', 'New file')..
-				mtos.theme:get_button('2,0.5;1.5,0.8', 'minor', 'load', 'Load', 'Load file')..
-				mtos.theme:get_button('4,0.5;1.5,0.8', 'minor', 'save', 'Save', 'Save file')..
-				mtos.theme:get_button('8,0.5;1.5,0.8', 'minor', 'print', 'Print', 'Print file')
+				mtos.theme:get_button('0,0.5;1.5,0.8', 'minor', 'clear', 'Nouv.', 'Nouveau fichier')..
+				mtos.theme:get_button('2,0.5;1.5,0.8', 'minor', 'load', 'Ouvrir', 'Ouvrir un fichier')..
+				mtos.theme:get_button('4,0.5;1.5,0.8', 'minor', 'save', 'Enreg.', 'Enregistrer un fichier')..
+				mtos.theme:get_button('8,0.5;1.5,0.8', 'minor', 'print', 'Impr.', 'Imprimer le fichier')
 		return formspec
 	end,
 	receive_fields_func = function(app, mtos, sender, fields)
