@@ -1,7 +1,7 @@
 laptop.register_app("removable", {
-	app_name = "Removable Storage",
+	app_name = "Stock. Amovible",
 	app_icon = "laptop_removable.png",
-	app_info = "Interface with Removable Media",
+	app_info = "Stockage amovible",
 	formspec_func = function(app, mtos)
 		local formspec = 
 				"list[nodemeta:"..mtos.pos.x..','..mtos.pos.y..','..mtos.pos.z..";main;0,0.3;1,1;]" ..
@@ -16,22 +16,22 @@ laptop.register_app("removable", {
 		if idata.stack then
 			-- change label
 			formspec = formspec .. "field[2,0.65;4,1;label;;"..idata.label.."]"..
-					mtos.theme:get_button('5.7,0.5;1.5,0.7', 'minor', 'set_label', 'Rename', 'Rename the '..idata.def.description)..
+					mtos.theme:get_button('5.7,0.5;1.5,0.7', 'minor', 'set_label', 'Renommer', 'Renommer le '..idata.def.description)..
 					mtos.theme:get_label('0,1.5', idata.def.description)..
 					mtos.theme:get_label('0,2', "Format: "..idata.os_format)..
 			-- buttons
-					mtos.theme:get_button('0,3;1.5,0.7', 'minor', 'format_wipe', 'wipe', 'Wipe all data from disk')..
-					mtos.theme:get_button('0,4;1.5,0.7', 'minor', 'format_data', 'data', 'Format disk to store data')
+					mtos.theme:get_button('0,3;1.5,0.7', 'minor', 'format_wipe', 'reset', 'Supprimer toutes les données du disque')..
+					mtos.theme:get_button('0,4;1.5,0.7', 'minor', 'format_data', 'data', 'Formater le disque')
 			if idata.def.groups.laptop_removable_usb then
-				formspec = formspec .. mtos.theme:get_button('2,3;1.5,0.7', 'minor', 'format_backup', 'backup', 'Store backup to disk')
+				formspec = formspec .. mtos.theme:get_button('2,3;1.5,0.7', 'minor', 'format_backup', 'backup', 'Créer une backup')
 			end
 			if idata.os_format == "backup" then
-				formspec = formspec .. mtos.theme:get_button('2,4;1.5,0.7', 'minor', 'restore', 'restore', 'Restore from backup disk')
+				formspec = formspec .. mtos.theme:get_button('2,4;1.5,0.7', 'minor', 'restore', 'restorer', 'Restorer une backup')
 			end
 
 			-- format CS-BOS
 			if idata.def.groups.laptop_removable_floppy then
-				formspec = formspec .. mtos.theme:get_button('4,3;1.5,0.7', 'minor', 'format_csbos', 'CS-BOS', 'Format disk to boot CS-BOS ')
+				formspec = formspec .. mtos.theme:get_button('4,3;1.5,0.7', 'minor', 'format_csbos', 'CS-BOS', 'Créer un disque bootable CS-BOS')
 			end
 		end
 		return formspec
