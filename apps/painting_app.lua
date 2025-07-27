@@ -32,9 +32,9 @@ for color, hex in pairs(hexcolors) do
 end
 
 laptop.register_app("painting", {
-	app_name = "Painting",
+	app_name = "Peinture",
 	app_icon = "laptop_painting.png",
-	app_info = "Show/Edit Pictures",
+	app_info = "Lecteur/Editeur d'images",
 	formspec_func = function(app, mtos)
 		local data = mtos.bdev:get_app_storage('system', 'painting')
 		data.files = data.files or {}
@@ -68,16 +68,16 @@ laptop.register_app("painting", {
 		end
 
 		local formspec = "background[0,3.35;7.2,6.35;"..mtos.theme.contrast_background.."]"..
-				mtos.theme:get_button('0,0.5;1.5,0.8', 'minor', 'new_16', 'New 16', 'New picture with resolution 16x16')..
-				mtos.theme:get_button('2,0.5;1.5,0.8', 'minor', 'new_32', 'New 32', 'New picture with resolution 32x32')..
-				mtos.theme:get_button('4,0.5;1.5,0.8', 'minor', 'load', 'Load', 'Load picture')..
-				mtos.theme:get_button('6,0.5;1.5,0.8', 'minor', 'save', 'Save', 'Save picture')
+				mtos.theme:get_button('0,0.5;1.5,0.8', 'minor', 'new_16', 'New 16', 'Nouvelle image de résolution 16x16')..
+				mtos.theme:get_button('2,0.5;1.5,0.8', 'minor', 'new_32', 'New 32', 'Nouvelle image de résolution 32x32')..
+				mtos.theme:get_button('4,0.5;1.5,0.8', 'minor', 'load', 'Ouvrir', 'Ouvrir une image')..
+				mtos.theme:get_button('6,0.5;1.5,0.8', 'minor', 'save', 'Enreg.', 'Enregistrer une image')
 		--if have_painting then
 		if false then
-			formspec = formspec .. mtos.theme:get_button('12,0.5;1.5,0.8', 'minor', 'print', 'Print', 'Print file')
+			formspec = formspec .. mtos.theme:get_button('12,0.5;1.5,0.8', 'minor', 'print', 'Impr.', 'Imprimer le fichier')
 		end
 		formspec = formspec .. "field[0.3,1.8;1.5,0.8;hex_color;;000000]"
-		formspec = formspec .. mtos.theme:get_button('1.5,1.5;1.5,0.8', 'minor', 'set_hex', 'Set', 'Set hex color')
+		formspec = formspec .. mtos.theme:get_button('1.5,1.5;1.5,0.8', 'minor', 'set_hex', 'Def.', 'Définir la couleur hex')
 		formspec = formspec .. mtos.theme:get_image_button('0,2.5;0.8,0.8', 'minor', 'brush_color', 'w.png^[colorize:#'..data.brush_color, '', 'Brush color')
 		for index,color in pairs(colors) do
 			local xoff = 3.5 + 0.8 * ((index-1)%8)
