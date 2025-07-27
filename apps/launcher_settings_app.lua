@@ -1,7 +1,7 @@
 laptop.register_app("launcher_settings", {
-	app_name = "Settings",
+	app_name = "Paramètres",
 	app_icon = "laptop_setting_wrench.png",
-	app_info = "Desktop settings.",
+	app_info = "Paramètres de l'ordinateur",
 	os_min_version = '5.00',
 	formspec_func = function(app, mtos)
 		local settings_data = mtos.bdev:get_app_storage('ram', 'launcher_settings')
@@ -20,7 +20,7 @@ laptop.register_app("launcher_settings", {
 		table.sort(settings_data.themes_tab)
 
 
-		local formspec = mtos.theme:get_label('0,0.5', "Select theme")
+		local formspec = mtos.theme:get_label('0,0.5', "Choissisez le thème")
 
 		local formspec = formspec..mtos.theme:get_tableoptions()..
 				"tablecolumns[text]"..
@@ -43,7 +43,7 @@ laptop.register_app("launcher_settings", {
 			formspec = formspec.."image[5.5,1;5,3.75;"..current_theme.desktop_background.."]"
 		end
 
-		formspec = formspec .. mtos.theme:get_button('0,3.2;2.5,0.6', 'major', 'theme_apply', 'Apply', 'Apply theme')
+		formspec = formspec .. mtos.theme:get_button('0,3.2;2.5,0.6', 'major', 'theme_apply', 'Appliquer', 'Apply theme')
 
 		return formspec
 	end,
