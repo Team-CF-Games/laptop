@@ -109,7 +109,7 @@ end
 laptop.register_app("tntsweeper", {
 	app_name = "TNT Sweeper",
 	app_icon = "laptop_tnt.png",
-	app_info = "Avoid hitting TNT",
+	app_info = "Evite la TNT !",
 	formspec_func = function(app, mtos)
 		local data = mtos.bdev:get_app_storage('ram', 'tntsweeper')
 		local sweeper = get_sweeper(data)
@@ -142,18 +142,19 @@ laptop.register_app("tntsweeper", {
 		formspec = formspec .. "background[12,0.5;3,1;"..mtos.theme.contrast_background..']'..
 				mtos.theme:get_label("12,0.5", "Open fields: "..sweeper.data.open_count.."/"..sweeper.data.open_all, "contrast")..
 				mtos.theme:get_label("12,1", "Bomb: "..sweeper.data.bomb_count.."/"..sweeper.data.bomb_all, "contrast")..
-				mtos.theme:get_button('12.5,2;1.5,0.8', 'major', 'reset', 'Small')..
-				mtos.theme:get_button('12.5,3;1.5,0.8', 'major', 'reset', 'Small hard')..
-				mtos.theme:get_button('12.5,4;1.5,0.8', 'major', 'reset', 'Midsize')..
-				mtos.theme:get_button('12.5,5;1.5,0.8', 'major', 'reset', 'Midsize hard')..
-				mtos.theme:get_button('12.5,6;1.5,0.8', 'major', 'reset', 'Big')..
-				mtos.theme:get_button('12.5,7;1.5,0.8', 'major', 'reset', 'Big hard')
+				mtos.theme:get_button('12.5,2;1.5,0.8', 'major', 'reset', 'Petit')..
+				mtos.theme:get_button('12.5,3;1.5,0.8', 'major', 'reset', 'Petit dur')..
+				mtos.theme:get_button('12.5,4;1.5,0.8', 'major', 'reset', 'Moyen')..
+				mtos.theme:get_button('12.5,5;1.5,0.8', 'major', 'reset', 'Moyen dur')..
+				mtos.theme:get_button('12.5,6;1.5,0.8', 'major', 'reset', 'Grand')..
+				mtos.theme:get_button('12.5,7;1.5,0.8', 'major', 'reset', 'Grand dur')
 		if data.mark_mode then
-			formspec = formspec .. mtos.theme:get_button('12.5,9;1.5,0.8', 'minor', 'mark_mode', 'mark', 'change to reveal mode')
-		else
-			formspec = formspec .. mtos.theme:get_button('12.5,9;1.5,0.8', 'minor', 'mark_mode', 'reveal', 'change to mark mode')
-		end
-		return formspec
+	formspec = formspec .. mtos.theme:get_button('12.5,9;1.5,0.8', 'minor', 'mark_mode', 'marquer', 'passer en mode révélation')
+else
+	formspec = formspec .. mtos.theme:get_button('12.5,9;1.5,0.8', 'minor', 'mark_mode', 'révéler', 'passer en mode marquage')
+end
+return formspec
+
 	end,
 
 	receive_fields_func = function(app, mtos, sender, fields)
