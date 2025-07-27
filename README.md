@@ -1,3 +1,6 @@
+Ce mod est un fork du mod Laptop
+
+
 # Laptop | Computers emulation for Minetest
 
 The Laptop mod is a group collaboration between bell07, Cross_over, Gerold55, Toby109tt, v-rob, veNext, Grizzly Adam  and Yours truly lol.
